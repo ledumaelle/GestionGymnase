@@ -7,9 +7,8 @@ package controller;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Set;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,7 +51,7 @@ public class FXMLAfficherReservationController implements Initializable
         cmbSalle.setItems(lesSalles);     
     } 
     
-    public void handleSelectionSalle()
+    public void vider()
     {
         int i,j,k;
         for(i=1;i<14;i++)
@@ -74,9 +73,15 @@ public class FXMLAfficherReservationController implements Initializable
         }
     }
     
+    public void handleSelectionSalle()
+    {
+        dateReservation.setValue(null);
+        vider();
+    }
+    
     public void handleSelectionDate()
     {
-        handleSelectionSalle();
+        vider();
         if (cmbSalle.getSelectionModel().getSelectedItem() != null && dateReservation.getValue() != null ) 
         {
             Salle UneSalle = (Salle)(cmbSalle.getSelectionModel().getSelectedItem());
@@ -87,6 +92,7 @@ public class FXMLAfficherReservationController implements Initializable
             int UnJour=0;
             String LAssoc="";
             ObservableList<Planning> lePlanning= GestionReservationBdD.getPlanning(UneSalle,UneDate);
+            ArrayList<String> lesAssociations = new ArrayList();
             if (!(lePlanning.isEmpty()))
             {
                 for(i=8;i<21;i++)
@@ -98,6 +104,7 @@ public class FXMLAfficherReservationController implements Initializable
                             UnHoraire = lePlanning.get(k).getUnHoraire();
                             UnJour = lePlanning.get(k).getUnJour();
                             LAssoc = lePlanning.get(k).getRefAssociation();
+                            
                             if(UnHoraire == i && UnJour == j)
                             {
                                 break;
@@ -107,6 +114,10 @@ public class FXMLAfficherReservationController implements Initializable
                         {
                             if (LAssoc != null)
                             {
+                                if(!(lesAssociations.contains(LAssoc)))
+                                {                                    
+                                    lesAssociations.add(lesAssociations.size(),LAssoc);
+                                }
                                 Label lblCase = new Label();
                                 lblCase.setText(LAssoc);
                                 lblCase.setStyle("-fx-text-fill: red;");
@@ -117,12 +128,16 @@ public class FXMLAfficherReservationController implements Initializable
                     }
                     l++;
                 }  
-            }
-            
-        }
+            }            
+        }                                   
+    }    
+}
         
         //plusDays
         //menosDays
-    }
-    
-}
+        //Pane paneCase = new Pane();
+        //paneCase.getChildren().add(lblCase);/lblCase.setFont(Font.font("System Bold", FontWeight.BOLD , 14)); 
+        //GridPane.setHalignment(lblCase, HPos.CENTER);
+        //GridPane.setValignment(lblCase, VPos.CENTER);
+        //lblCase.setAlignment(Pos.CENTER_RIGHT);
+     
