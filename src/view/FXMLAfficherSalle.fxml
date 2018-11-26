@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="283.0" prefWidth="351.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLAfficherSalleController">
+   <children>
+       
+       <Label id="lblSalle" fx:id="lblSalle" layoutX="25.0" layoutY="34.0" text="Salle : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+       <ComboBox id="cmbSalle" fx:id="cmbSalle" layoutX="84.0" layoutY="30.0" onAction="#handleAfficherUneSalle" prefHeight="25.0" prefWidth="234.0"></ComboBox> 
+       
+      <Label id="lblRefSalle" fx:id="lblRefSalle" layoutX="25.0" layoutY="95.0" text="Référence  :" />
+      <TextField id="txtRefSalle" fx:id="txtRefSalle" editable="false" layoutX="177.0" layoutY="95.0" />
+      
+      <Label id="lblSurface" fx:id="lblSurface" layoutX="25.0" layoutY="125.0" text="Surface : " />
+      <TextField id="txtSurfaceSalle" fx:id="txtSurfaceSalle" editable="false" layoutX="177.0" layoutY="125.0" />
+
+      <Label id="lblTypeRevetement" fx:id="lblTypeRevetement" layoutX="25.0" layoutY="155.0" prefHeight="17.0" prefWidth="118.0" text="Type de revetement : " />
+      <TextField id="txtTypeRevetement" fx:id="txtTypeRevetement" editable="false" layoutX="177.0" layoutY="155.0" />
+      
+      <Label id="lblSalleSport" fx:id="lblSalleSport" layoutX="25.0" layoutY="185.0" text="Liste des sports :" />
+      <ListView id="lvSalleSport" fx:id="lvSalleSport" layoutX="177.0" layoutY="185.0" prefHeight="89.0" prefWidth="149.0" />
+      
+   </children>
+</AnchorPane>

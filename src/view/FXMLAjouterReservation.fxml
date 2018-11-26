@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="441.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLAjouterReservationController">
+   <children>
+      <Label id="lblAssociation" fx:id="lblAssociation" layoutX="24.0" layoutY="33.0" text="Association : " />
+      <ComboBox id="cmbAssociation" fx:id="cmbAssociation" layoutX="113.0" layoutY="29.0" onAction="#handleSelectionAssociation" prefHeight="25.0" prefWidth="257.0" />
+      <Label id="lblSport" fx:id="lblSport" layoutX="24.0" layoutY="80.0" text="Sport : " />
+      <Label id="lblSalle" fx:id="lblSalle" layoutX="24.0" layoutY="132.0" text="Salle : " />
+      <Label id="lblPlanning" fx:id="lblPlanning" layoutX="24.0" layoutY="212.0" text="Planning de la salle sélectionnée : " />
+      <Label id="lblDate" fx:id="lblDate" layoutX="294.0" layoutY="220.0" text="Date : " />
+      <Label id="lblHeure" fx:id="lblHeure" layoutX="290.0" layoutY="274.0" text="Heure : " />
+      <Button id="btnAjouter" fx:id="btnAjouter" layoutX="480.0" layoutY="308.0" mnemonicParsing="false" onAction="#handleBtnAjouter" text="Ajouter" />
+      <Button id="btnAnnuler" fx:id="btnAnnuler" layoutX="479.0" layoutY="348.0" mnemonicParsing="false" onAction="#handleBtnAnnuler" text="Annuler" />
+      <TableView id="tabReservation" fx:id="tabReservation" layoutX="24.0" layoutY="256.0" onKeyPressed="#handleSupprimerReservation" prefHeight="154.0" prefWidth="212.0">
+        <columns>
+          <TableColumn id="colAssociation" fx:id="colAssociation" editable="false" prefWidth="101.0" text="Association" />
+            <TableColumn id="colHeure" fx:id="colHeure" editable="false" prefWidth="69.0" text="Heure" />
+        </columns>
+      </TableView>
+      <ComboBox id="cmbSport" fx:id="cmbSport" layoutX="113.0" layoutY="76.0" onAction="#handleSelectionSport" prefHeight="25.0" prefWidth="257.0" />
+      <ComboBox id="cmbSalle" fx:id="cmbSalle" layoutX="113.0" layoutY="128.0" onAction="#handleSelectionSalle" prefHeight="25.0" prefWidth="257.0" />
+      <DatePicker id="dateReservation" fx:id="dateReservation" layoutX="343.0" layoutY="216.0" onAction="#handleDateReservation" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" focusTraversable="true" layoutX="384.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../ressources/img/AjouterUneReservation.jpg" />
+         </image>
+      </ImageView>
+      <ListView id="lvHeureReservation" fx:id="lvHeureReservation" editable="true" layoutX="343.0" layoutY="271.0" prefHeight="154.0" prefWidth="100.0" />
+    </children>
+</AnchorPane>
