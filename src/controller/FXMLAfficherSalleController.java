@@ -28,7 +28,7 @@ public class FXMLAfficherSalleController implements Initializable
     @FXML
     private ComboBox cmbSalle; 
     @FXML
-    private TextField txtRefSalle;
+    private TextField txtNumSalle;
     @FXML
     private TextField txtSurfaceSalle;
     @FXML
@@ -55,7 +55,7 @@ public class FXMLAfficherSalleController implements Initializable
     public void handleAfficherUneSalle()
     {
         Salle UneSalle = (Salle)(cmbSalle.getSelectionModel().getSelectedItem());
-        txtRefSalle.setText(UneSalle.getRefSalle());
+        txtNumSalle.setText(UneSalle.getNomSalle());
         txtSurfaceSalle.setText(String.valueOf(UneSalle.getSurface()));
         txtTypeRevetement.setText(UneSalle.getTypeDeRevetement());
         ObservableList<Sport> lesSports = GestionSportBdD.getSportParSalle(UneSalle);

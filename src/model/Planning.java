@@ -11,25 +11,25 @@ package model;
  */
 public class Planning
 {
-    private String refAssociation;
+    private Association UneAssociation;
     private int UnJour;
     private int UnHoraire;
 
-    public Planning(String refAssociation, int UnJour, int UnHoraire)
+    public Planning(Association UneAssociation, int UnJour, int UnHoraire)
     {
-        this.refAssociation = refAssociation;
+        this.UneAssociation = UneAssociation;
         this.UnJour = UnJour;
         this.UnHoraire = UnHoraire;
     }
 
-    public String getRefAssociation()
+    public Association getUneAssociation()
     {
-        return refAssociation;
+        return UneAssociation;
     }
 
-    public void setRefAssociation(String refAssociation)
+    public void setUneAssociation(Association UneAssociation)
     {
-        this.refAssociation = refAssociation;
+        this.UneAssociation = UneAssociation;
     }
 
     public int getUnJour()
@@ -52,5 +52,6 @@ public class Planning
         this.UnHoraire = UnHoraire;
     }
 
+    
     
 }

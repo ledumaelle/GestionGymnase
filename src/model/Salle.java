@@ -11,30 +11,37 @@ package model;
  */
 public class Salle
 {
-    private String RefSalle;
+    private int NumSalle;
+    private String NomSalle;
     private float Surface;
     private String TypeDeRevetement;
 
-    public Salle()
+    public Salle(int NumSalle, String NomSalle, float Surface, String TypeDeRevetement)
     {
-        
-    }  
-
-    public Salle(String RefSalle, float Surface, String TypeDeRevetement)
-    {
-        this.RefSalle = RefSalle;
+        this.NumSalle = NumSalle;
+        this.NomSalle = NomSalle;
         this.Surface = Surface;
         this.TypeDeRevetement = TypeDeRevetement;
     }
 
-    public String getRefSalle()
+    public int getNumSalle()
     {
-        return RefSalle;
+        return NumSalle;
     }
 
-    public void setRefSalle(String RefSalle)
+    public void setNumSalle(int NumSalle)
     {
-        this.RefSalle = RefSalle;
+        this.NumSalle = NumSalle;
+    }
+
+    public String getNomSalle()
+    {
+        return NomSalle;
+    }
+
+    public void setNomSalle(String NomSalle)
+    {
+        this.NomSalle = NomSalle;
     }
 
     public float getSurface()
@@ -56,11 +63,11 @@ public class Salle
     {
         this.TypeDeRevetement = TypeDeRevetement;
     }
-    
+
     @Override
     public String toString()
     {
-        return RefSalle + " ~ " + Surface + "m²"; 
+        return NomSalle + " ~ " + Surface + "m²"; 
     }
     
 }

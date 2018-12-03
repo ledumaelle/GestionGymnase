@@ -116,7 +116,7 @@ public class FXMLAjouterReservationController implements Initializable
             if (UneSalle != null && dateReservation.getValue() != null && (LocalDate.now().isBefore(dateReservation.getValue()) || LocalDate.now().isEqual(dateReservation.getValue())))
             {
                 // Initialise le TableView reservation
-                colAssociation.setCellValueFactory(new PropertyValueFactory<Reservation, String>("RefAssociation"));
+                colAssociation.setCellValueFactory(new PropertyValueFactory<Reservation, String>("NomAssociation"));
                 colHeure.setCellValueFactory(new PropertyValueFactory<Reservation, Integer>("Heure"));  
 
                 // Pour redimensionner les colonnes automatiquement
@@ -133,7 +133,7 @@ public class FXMLAjouterReservationController implements Initializable
                 ObservableList<String> lesHeuresDisponibles = FXCollections.observableArrayList();
                 if(!(lesHeuresOccupees.isEmpty()))
                 {
-                    for (i=8; i<20; i++)
+                    for (i=8; i<21; i++)
                     {
                         same =false;
                         for(j=0;j<lesHeuresOccupees.size();j++)
@@ -151,7 +151,7 @@ public class FXMLAjouterReservationController implements Initializable
                 }
                 else
                 {
-                    for (i=8; i<20; i++)
+                    for (i=8; i<21; i++)
                     {
                         lesHeuresDisponibles.add(i + "-" + (i+1));
                     }
@@ -170,12 +170,12 @@ public class FXMLAjouterReservationController implements Initializable
         if (cmbAssociation.getSelectionModel().getSelectedItem() == null || cmbAssociation.getSelectionModel().getSelectedItem() == "")
         {
             messageErreur =messageErreur + "\n" + "Association invalide";
-          }
+        }
         
         if (cmbSport.getSelectionModel().getSelectedItem() == null || cmbSport.getSelectionModel().getSelectedItem() == "")
         {
             messageErreur =messageErreur + "\n" + "Sport invalide";
-         }
+        }
 
         if (cmbSalle.getSelectionModel().getSelectedItem() == null || cmbSalle.getSelectionModel().getSelectedItem() == "")
         {
@@ -223,7 +223,7 @@ public class FXMLAjouterReservationController implements Initializable
                 String PlageHorraire= lesHeuresReservees.get(i);
                 String[] tab = PlageHorraire.split("-");
                 Integer UneHeure = Integer.parseInt(tab[0]);
-                Reservation UneReservation= new Reservation(UneSalle.getRefSalle(),UneDate,UneHeure,UneAssociation.getRefAssociation());                
+                Reservation UneReservation= new Reservation(UneSalle.getNumSalle(),UneDate,UneHeure,UneAssociation);                
                           
                 nbLignes=nbLignes+GestionReservationBdD.ajouterReservation(UneReservation);
                 if (nbLignes == -1)
@@ -271,7 +271,7 @@ public class FXMLAjouterReservationController implements Initializable
         if (UneSalle != null && dateReservation.getValue() != null && (LocalDate.now().isBefore(dateReservation.getValue()) || LocalDate.now().isEqual(dateReservation.getValue())))
         {
             // Initialise le TableView reservation
-            colAssociation.setCellValueFactory(new PropertyValueFactory<Reservation, String>("RefAssociation"));
+            colAssociation.setCellValueFactory(new PropertyValueFactory<Reservation, String>("nomAssociation"));
             colHeure.setCellValueFactory(new PropertyValueFactory<Reservation, Integer>("Heure"));  
             
             // Pour redimensionner les colonnes automatiquement

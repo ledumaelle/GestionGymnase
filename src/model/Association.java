@@ -11,34 +11,46 @@ package model;
  */
 public class Association
 {
-    private String RefAssociation;
+    private int NumAssociation;
+    private String NomAssociation;
     private String AdresseAssociation;
-    private String VilleAssociation;
     private String CPAssociation;
+    private String VilleAssociation;
     private String NomResponsable;
 
     public Association()
     {
         
-    }  
+    }
 
-    public Association(String RefAssociation, String AdresseAssociation, String VilleAssociation, String CPAssociation, String NomResponsable)
+    public Association(int NumAssociation, String NomAssociation, String AdresseAssociation, String CPAssociation, String VilleAssociation, String NomResponsable)
     {
-        this.RefAssociation = RefAssociation;
+        this.NumAssociation = NumAssociation;
+        this.NomAssociation = NomAssociation;
         this.AdresseAssociation = AdresseAssociation;
-        this.VilleAssociation = VilleAssociation;
         this.CPAssociation = CPAssociation;
+        this.VilleAssociation = VilleAssociation;
         this.NomResponsable = NomResponsable;
     }
 
-    public String getRefAssociation()
+    public int getNumAssociation()
     {
-        return RefAssociation;
+        return NumAssociation;
     }
 
-    public void setRefAssociation(String RefAssociation)
+    public void setNumAssociation(int NumAssociation)
     {
-        this.RefAssociation = RefAssociation;
+        this.NumAssociation = NumAssociation;
+    }
+
+    public String getNomAssociation()
+    {
+        return NomAssociation;
+    }
+
+    public void setNomAssociation(String NomAssociation)
+    {
+        this.NomAssociation = NomAssociation;
     }
 
     public String getAdresseAssociation()
@@ -82,11 +94,10 @@ public class Association
     }
 
     
-    
     @Override
     public String toString()
     {
-        return RefAssociation + " à " + VilleAssociation + " / " + NomResponsable ; 
+        return NomAssociation + " à " + VilleAssociation + " / " + NomResponsable ; 
     }
     
 }

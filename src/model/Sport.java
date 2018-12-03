@@ -5,22 +5,36 @@
  */
 package model;
 
+import java.util.Objects;
+
 /**
  *
  * @author Rabelais
  */
 public class Sport
 {
+    private int NumSport; 
     private String NomSport;
-
-    public Sport()
-    {
-        
-    }  
 
     public Sport(String NomSport)
     {
         this.NomSport = NomSport;
+    }
+    
+    public Sport(int NumSport, String NomSport)
+    {
+        this.NumSport = NumSport;
+        this.NomSport = NomSport;
+    }
+
+    public int getNumSport()
+    {
+        return NumSport;
+    }
+
+    public void setNumSport(int NumSport)
+    {
+        this.NumSport = NumSport;
     }
 
     public String getNomSport()
@@ -31,6 +45,22 @@ public class Sport
     public void setNomSport(String NomSport)
     {
         this.NomSport = NomSport;
+    }
+
+     @Override
+    public boolean equals(Object obj) {
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        return (this.NomSport == null ? ((Sport) obj).NomSport == null : this.NomSport.equals(((Sport) obj).NomSport));
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 5;
+        hash = 19 * hash + Objects.hashCode(this.NomSport);
+        return hash;
     }
     
     @Override

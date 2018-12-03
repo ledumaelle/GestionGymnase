@@ -19,6 +19,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import model.Association;
 import model.GestionReservationBdD;
 import model.GestionSalleBdD;
 import model.Planning;
@@ -90,9 +91,9 @@ public class FXMLAfficherReservationController implements Initializable
             int l=1;
             int UnHoraire=0;
             int UnJour=0;
-            String LAssoc="";
+            Association LAssoc=new Association();
             ObservableList<Planning> lePlanning= GestionReservationBdD.getPlanning(UneSalle,UneDate);
-            ArrayList<String> lesAssociations = new ArrayList();
+            ArrayList<Association> lesAssociations = new ArrayList();
             if (!(lePlanning.isEmpty()))
             {
                 for(i=8;i<21;i++)
@@ -103,7 +104,7 @@ public class FXMLAfficherReservationController implements Initializable
                         {
                             UnHoraire = lePlanning.get(k).getUnHoraire();
                             UnJour = lePlanning.get(k).getUnJour();
-                            LAssoc = lePlanning.get(k).getRefAssociation();
+                            LAssoc = lePlanning.get(k).getUneAssociation();
                             
                             if(UnHoraire == i && UnJour == j)
                             {
@@ -119,7 +120,7 @@ public class FXMLAfficherReservationController implements Initializable
                                     lesAssociations.add(lesAssociations.size(),LAssoc);
                                 }
                                 Label lblCase = new Label();
-                                lblCase.setText(LAssoc);
+                                lblCase.setText(LAssoc.getNomAssociation());
                                 lblCase.setStyle("-fx-text-fill: red;");
                                 GridPane.setConstraints(lblCase,j,l,1,1,HPos.CENTER,VPos.CENTER);
                                 gridReservation.getChildren().addAll(lblCase);

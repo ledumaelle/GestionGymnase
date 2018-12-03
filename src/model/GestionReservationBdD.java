@@ -29,13 +29,18 @@ public class GestionReservationBdD
             Class.forName(pilote);
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();
-            jeuEnr = stmt.executeQuery("SELECT * FROM RESERVATION,SALLE WHERE RESERVATION.RefSalle=SALLE.RefSalle AND SALLE.RefSalle=RESERVATION.RefSalle AND SALLE.RefSalle='"+pUneSalle.getRefSalle()+"' AND Date='"+pUneDate+"' ORDER BY date,heure");
-            if (jeuEnr != null)
+            jeuEnr = stmt.executeQuery("SELECT * FROM RESERVATION,SALLE,ASSOCIATION WHERE RESERVATION.NumSalle=SALLE.NumSalle AND ASSOCIATION.NumAssociation=RESERVATION.NumAssociation AND SALLE.NumSalle="+pUneSalle.getNumSalle()+" AND Date='"+pUneDate+"' ORDER BY date,heure");
+            if (jeuEnr.next())
             {
                 Reservation UneReservation;  
+                Association UneAssociation;
+                UneAssociation= new Association(jeuEnr.getInt("NumAssociation"),jeuEnr.getString("NomAssociation"), jeuEnr.getString("AdresseAssociation"),jeuEnr.getString("CPAssociation"),jeuEnr.getString("VilleAssociation"),jeuEnr.getString("NomResponsable"));
+                UneReservation= new Reservation(jeuEnr.getInt("NumSalle"), jeuEnr.getDate("date"),jeuEnr.getInt("heure"),UneAssociation);
+                lesReservationsSalle.add(UneReservation);
                 while (jeuEnr.next())
                 {
-                    UneReservation= new Reservation(jeuEnr.getString("refSalle"), jeuEnr.getDate("date"),jeuEnr.getInt("heure"),jeuEnr.getString("refAssociation"));
+                    UneAssociation= new Association(jeuEnr.getInt("NumAssociation"),jeuEnr.getString("NomAssociation"), jeuEnr.getString("AdresseAssociation"),jeuEnr.getString("CPAssociation"),jeuEnr.getString("VilleAssociation"),jeuEnr.getString("NomResponsable"));
+                    UneReservation= new Reservation(jeuEnr.getInt("NumSalle"), jeuEnr.getDate("date"),jeuEnr.getInt("heure"),UneAssociation);
                     lesReservationsSalle.add(UneReservation);
                 } 
             }                      			            
@@ -67,12 +72,12 @@ public class GestionReservationBdD
             Class.forName(pilote);
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();  
-            jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbReservations" + "  FROM RESERVATION WHERE RefSalle='"+pUneReservation.getRefSalle()+"' AND Date='"+pUneReservation.getDate()+"' AND Heure = "+pUneReservation.getHeure());
+            jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbReservations" + "  FROM RESERVATION WHERE NumSalle="+pUneReservation.getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure = "+pUneReservation.getHeure());
             jeuEnr.next();
             nbLignes=jeuEnr.getInt("NbReservations");
             if(nbLignes == 0)
             {
-                nbLignes = stmt.executeUpdate("INSERT INTO RESERVATION VALUES ('"+pUneReservation.getRefSalle()+"','"+pUneReservation.getDate()+"',"+pUneReservation.getHeure()+",'"+pUneReservation.getRefAssociation()+"')");
+                nbLignes = stmt.executeUpdate("INSERT INTO RESERVATION VALUES ("+pUneReservation.getNumSalle()+",'"+pUneReservation.getDate()+"',"+pUneReservation.getHeure()+","+pUneReservation.getUneAssociation().getNumAssociation()+")");
             }
             else
             {
@@ -105,12 +110,12 @@ public class GestionReservationBdD
             Class.forName(pilote);
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();  
-            jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbReservations" + "  FROM RESERVATION WHERE RefSalle='"+pUneReservation.getRefSalle()+"' AND Date='"+pUneReservation.getDate()+"' AND Heure = "+pUneReservation.getHeure());
+            jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbReservations" + "  FROM RESERVATION WHERE NumSalle="+pUneReservation.getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure = "+pUneReservation.getHeure());
             jeuEnr.next();
             nbLignes=jeuEnr.getInt("NbReservations");
             if(nbLignes == 1)
             {
-                nbLignes = stmt.executeUpdate("DELETE FROM RESERVATION WHERE RefSalle='"+pUneReservation.getRefSalle()+"' AND Date='"+pUneReservation.getDate()+"' AND Heure="+pUneReservation.getHeure());
+                nbLignes = stmt.executeUpdate("DELETE FROM RESERVATION WHERE NumSalle="+pUneReservation.getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure="+pUneReservation.getHeure());
             }
             else
             {
@@ -143,7 +148,7 @@ public class GestionReservationBdD
             Class.forName(pilote);
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();  
-            jeuEnr = stmt.executeQuery("SELECT heure FROM RESERVATION WHERE RefSalle='"+pUneSalle.getRefSalle()+"' AND Date='"+pUneDate+"' ORDER BY heure ASC");
+            jeuEnr = stmt.executeQuery("SELECT heure FROM RESERVATION WHERE NumSalle="+pUneSalle.getNumSalle()+" AND Date='"+pUneDate+"' ORDER BY heure ASC");
             while (jeuEnr.next())
             {             
                 lesheuresReservees.add(jeuEnr.getInt("heure"));
@@ -176,24 +181,27 @@ public class GestionReservationBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();
             int NbJours;
-            if(pUneDate.getDayOfWeek().getValue() != 0)
+            Association UneAssociation ; 
+            if(pUneDate.getDayOfWeek().getValue() != 1)
             {
-                pUneDate = pUneDate.minusDays(pUneDate.getDayOfWeek().getValue());
+                pUneDate = pUneDate.minusDays(pUneDate.getDayOfWeek().getValue()-1);
             }
-            jeuEnr = stmt.executeQuery("SELECT * FROM RESERVATION,SALLE WHERE RESERVATION.RefSalle=SALLE.RefSalle AND SALLE.RefSalle=RESERVATION.RefSalle AND SALLE.RefSalle='"+pUneSalle.getRefSalle()+"' AND Date BETWEEN '"+pUneDate+"' AND '"+pUneDate.plusDays(6)+"' ORDER BY heure");
+            jeuEnr = stmt.executeQuery("SELECT * FROM RESERVATION,SALLE,ASSOCIATION WHERE RESERVATION.NumSalle=SALLE.NumSalle AND ASSOCIATION.NumAssociation=RESERVATION.NumAssociation AND SALLE.NumSalle="+pUneSalle.getNumSalle()+" AND Date BETWEEN '"+pUneDate+"' AND '"+pUneDate.plusDays(6)+"' ORDER BY heure");
             if(jeuEnr.next())
             {
                 String UnJour =  jeuEnr.getString("date");
                 NbJours= TestDate(pUneDate,UnJour);
                 Integer UnHoraire =  jeuEnr.getInt("heure");
-                Planning UnPlanning =  new Planning(jeuEnr.getString("refAssociation"),NbJours,UnHoraire);
+                UneAssociation= new Association(jeuEnr.getInt("NumAssociation"),jeuEnr.getString("NomAssociation"), jeuEnr.getString("AdresseAssociation"),jeuEnr.getString("CPAssociation"),jeuEnr.getString("VilleAssociation"),jeuEnr.getString("NomResponsable"));
+                Planning UnPlanning =  new Planning(UneAssociation,NbJours,UnHoraire);
                 lePlanning.add(UnPlanning);
                 while (jeuEnr.next())
                 {   
+                    UneAssociation= new Association(jeuEnr.getInt("NumAssociation"),jeuEnr.getString("NomAssociation"), jeuEnr.getString("AdresseAssociation"),jeuEnr.getString("CPAssociation"),jeuEnr.getString("VilleAssociation"),jeuEnr.getString("NomResponsable"));
                     UnJour =  jeuEnr.getString("date");
                     NbJours= TestDate(pUneDate,UnJour);
                     UnHoraire = jeuEnr.getInt("heure");
-                    lePlanning.add( new Planning (jeuEnr.getString("refAssociation"),NbJours,UnHoraire));
+                    lePlanning.add( new Planning (UneAssociation,NbJours,UnHoraire));
                 }  
             }
             jeuEnr.close();

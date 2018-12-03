@@ -92,7 +92,7 @@ public class FXMLNoeudRacineController implements Initializable
             FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLAjouterSport.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Ajouter une salle");
+            dialogStage.setTitle("Ajouter un sport");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -119,7 +119,7 @@ public class FXMLNoeudRacineController implements Initializable
             FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLAfficherReservation.fxml"));
             AnchorPane page = (AnchorPane) loader.load();
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Affiche le planning");
+            dialogStage.setTitle("Afficher le planning");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -133,5 +133,136 @@ public class FXMLNoeudRacineController implements Initializable
           System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
         }
     }  
+    
+    @FXML
+    public void handleAfficherAssociation()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLAfficherAssociation.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Afficher une association");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            // Affiche la boite de dialogue et attend que l'utilisateur la ferme
+            dialogStage.showAndWait();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+        }
+    }  
+    
+    @FXML
+    public boolean handleModifierSport()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLModifierSport.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modifier un sport");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            FXMLModifierSportController controleur = loader.getController();
+            controleur.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return controleur.isOkClick();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+          return false;
+        }
+    }
+    
+    @FXML 
+    public boolean handleAjouterAssociation()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLAjouterAssociation.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Ajouter une association");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            FXMLAjouterAssociationController controleur = loader.getController();
+            controleur.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return controleur.isOkClick();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+          return false;
+        }
+    }
+    
+    @FXML
+    public boolean handleModifierAssociation()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLModifierAssociation.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modifier une association");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            FXMLModifierAssociationController controleur = loader.getController();
+            controleur.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return controleur.isOkClick();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+          return false;
+        }
+    }
+    
+    @FXML
+    public boolean handleModifierSalle()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLModifierSalle.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Modifier une salle");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            FXMLModifierSalleController controleur = loader.getController();
+            controleur.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return controleur.isOkClick();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+          return false;
+        }
+    }
         
 }

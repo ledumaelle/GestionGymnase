@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="188.0" prefWidth="514.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.FXMLModifierSportController">
+   <children>
+      <ComboBox id="cmbSport" fx:id="cmbSport" layoutX="97.0" layoutY="23.0" prefHeight="25.0" prefWidth="171.0" onAction="#handleSelectionSport"/>
+      <Label id="lblSport" fx:id="lblSport" layoutX="32.0" layoutY="27.0" text="Sport : " />
+      <Label layoutX="56.0" layoutY="90.0" text="Sport :" />
+      <TextField id="txtSport" fx:id="txtSport" layoutX="120.0" layoutY="86.0" />
+      <Button id="btnModifier" fx:id="btnModifier" layoutX="70.0" layoutY="145.0" mnemonicParsing="false" text="Modifier" onAction="#handleBtnModifier"/>
+      <Button id="btnAnnuler" fx:id="btnAnnuler" layoutX="153.0" layoutY="145.0" mnemonicParsing="false" text="Annuler" onAction="#handleBtnAnnuler"/>
+      <ImageView fitHeight="145.0" fitWidth="210.0" layoutX="290.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../ressources/img/ModifierSport.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="499.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLModifierSalleController">
+   <children>
+      <Label layoutX="185.0" layoutY="24.0" text="Modifier une salle " textFill="#4800ff">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <ComboBox id="cmbSalle" fx:id="cmbSalle" layoutX="90.0" layoutY="78.0" onAction="#handleSelectionSalle" prefHeight="25.0" prefWidth="166.0" />
+      <Label layoutX="25.0" layoutY="82.0" text="Salle : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="138.0" prefHeight="17.0" prefWidth="37.0" text="Nom : " />
+      <Label layoutX="49.0" layoutY="171.0" text="Surface : " />
+      <Label layoutX="49.0" layoutY="206.0" text="Type de revetement : " />
+      <TextField id="txtNom" fx:id="txtNom" layoutX="173.0" layoutY="134.0" />
+      <TextField id="txtSurface" fx:id="txtSurface" layoutX="173.0" layoutY="167.0" />
+      <TextField id="txtTypeRevetement" fx:id="txtTypeRevetement" layoutX="173.0" layoutY="202.0" />
+      <Label layoutX="23.0" layoutY="270.0" text="Liste de tous les sports : " />
+      <ListView id="lvSport" fx:id="lvSport" layoutX="25.0" layoutY="287.0" prefHeight="124.0" prefWidth="200.0" />
+      <Button id="btnEnvoiSport" fx:id="btnEnvoiSport" layoutX="265.0" layoutY="287.0" mnemonicParsing="false" onAction="#handleBtnEnvoiSport" text="--&gt;" />
+      <Button id="btnEnleveSport" fx:id="btnEnleveSport" layoutX="265.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleBtnEnleveSport" text="&lt;--" />
+      <Button id="btnAjoutSport" fx:id="btnAjoutSport" layoutX="265.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleBtnAjoutSport" prefHeight="25.0" prefWidth="34.0" text="+" />
+      <ListView id="lvSportSalle" fx:id="lvSportSalle" layoutX="378.0" layoutY="287.0" prefHeight="124.0" prefWidth="200.0" />
+      <Label layoutX="378.0" layoutY="270.0" text="Liste des sports que la salle accueille :" />
+      <Button id="btnModifier" fx:id="btnModifier" layoutX="62.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleBtnModifier" text="Modifier" />
+      <Button id="btnAnnuler" fx:id="btnAnnuler" layoutX="133.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleBtnAnnuler" text="Annuler" />
+      <Button id="btnAjoutNouveauSport" fx:id="btnAjoutNouveauSport" layoutX="534.0" layoutY="443.0" mnemonicParsing="false" onAction="#handleBtnAjoutNouveauSport" text="+" visible="false" />
+      <Label id="lblNomNouveauSport" fx:id="lblNomNouveauSport" layoutX="235.0" layoutY="447.0" text="Nom du nouveau sport :" visible="false" />
+      <TextField id="txtNomNouveauSport" fx:id="txtNomNouveauSport" layoutX="378.0" layoutY="443.0" visible="false" />
+      <ImageView fitHeight="143.0" fitWidth="232.0" layoutX="346.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../ressources/img/ModifierSalle.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
