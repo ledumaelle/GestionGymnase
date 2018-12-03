@@ -16,6 +16,18 @@ public class Salle
     private float Surface;
     private String TypeDeRevetement;
 
+    public Salle(String NomSalle)
+    {
+        this.NomSalle = NomSalle;
+    }
+    
+    public Salle(String NomSalle, float Surface, String TypeDeRevetement)
+    {
+        this.NomSalle = NomSalle;
+        this.Surface = Surface;
+        this.TypeDeRevetement = TypeDeRevetement;
+    }
+    
     public Salle(int NumSalle, String NomSalle, float Surface, String TypeDeRevetement)
     {
         this.NumSalle = NumSalle;

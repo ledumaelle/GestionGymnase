@@ -50,6 +50,39 @@ public class GestionSalleBdD
         return lesSalles;
     }
     
+    public static Salle getSalle(String pNom, float pSurface, String pTypeRevetement)
+    {
+        Connection conn; //connexion
+	Statement stmt;
+	ResultSet jeuEnr;
+        Salle UneSalle=new Salle ("Erreur");
+	String pilote = "org.gjt.mm.mysql.Driver";
+	String url = new String("jdbc:mysql://localhost/gymnase");
+        try
+	{
+            Class.forName(pilote);
+            conn = DriverManager.getConnection(url,"root","");
+            stmt = conn.createStatement();			            
+            jeuEnr = stmt.executeQuery("SELECT * FROM SALLE WHERE NomSalle = '" +pNom+"' AND Surface =" +pSurface+ " AND TypeRevetement='"+pTypeRevetement+"'" );
+            if(jeuEnr.next())
+            {
+                UneSalle= new Salle(jeuEnr.getInt("NumSalle"),jeuEnr.getString("NomSalle"), jeuEnr.getFloat("surface"),jeuEnr.getString("TypeRevetement"));                
+            } 
+            jeuEnr.close();
+            stmt.close();
+            conn.close();
+	}			        
+	catch (SQLException sqle)
+	{
+            System.out.println("ERREUR SQL " + sqle.getMessage());
+	}
+	catch (ClassNotFoundException cnfe)
+	{
+            System.out.println("ERREUR Driver " + cnfe.getMessage());
+	} 
+        return UneSalle;
+    }
+    
     public static int getNbMax()
     {
         Connection conn; //connexion
@@ -115,6 +148,45 @@ public class GestionSalleBdD
             System.out.println("ERREUR Driver " + cnfe.getMessage());
 	} 
         return lesSallesSport;
+    }
+    
+    public static int ajouterSalle(Salle pUneSalle)
+    {
+        Connection conn; //connexion
+        int NbLignes=0;
+	Statement stmt;
+	ResultSet jeuEnr;
+	String pilote = "org.gjt.mm.mysql.Driver";
+	String url = new String("jdbc:mysql://localhost/gymnase");
+        try
+	{
+            Class.forName(pilote);
+            conn = DriverManager.getConnection(url,"root","");
+            stmt = conn.createStatement();			            
+            jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbSalles" + "  FROM SALLE WHERE NomSalle = '"+pUneSalle.getNomSalle()+"'");
+            jeuEnr.next();
+            NbLignes=jeuEnr.getInt("NbSalles");
+            if(NbLignes == 0)
+            {
+                NbLignes = stmt.executeUpdate("INSERT INTO SALLE(NomSalle,Surface,TypeRevetement) VALUES ('"+pUneSalle.getNomSalle()+"' , "+pUneSalle.getSurface()+" , '"+pUneSalle.getTypeDeRevetement()+"')");
+            }
+            else
+            {
+                NbLignes=-1;
+            }           			            
+            jeuEnr.close();
+            stmt.close();
+            conn.close();
+	}			        
+	catch (SQLException sqle)
+	{
+            System.out.println("ERREUR SQL GestionSalleBdD.ajouterSalle()" + sqle.getMessage());
+	}
+	catch (ClassNotFoundException cnfe)
+	{
+            System.out.println("ERREUR Driver " + cnfe.getMessage());
+	} 
+        return NbLignes;
     }
     
     public static int modifierSalle(Salle pUneSalle1, Salle pUneSalle2)

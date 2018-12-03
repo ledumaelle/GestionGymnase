@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="495.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="controller.FXMLAjouterSalleController">
+   <children>
+      <Button id="btnAnnuler" fx:id="btnAnnuler" layoutX="143.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleBtnAnnuler" text="Annuler" />
+      <Button id="btnAjouter" fx:id="btnAjouter" layoutX="72.0" layoutY="453.0" mnemonicParsing="false" onAction="#handleBtnAjouter" text="Ajouter" />
+      <Label layoutX="388.0" layoutY="280.0" text="Liste des sports que la salle accueille :" />
+      <ListView id="lvSportSalle" fx:id="lvSportSalle" layoutX="388.0" layoutY="297.0" prefHeight="124.0" prefWidth="200.0" />
+      <Button id="btnAjoutSport" fx:id="btnAjoutSport" layoutX="275.0" layoutY="396.0" mnemonicParsing="false" onAction="#handleBtnAjoutSport" prefHeight="25.0" prefWidth="34.0" text="+" />
+      <Button id="btnEnleveSport" fx:id="btnEnleveSport" layoutX="275.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleBtnEnleveSport" text="&lt;--" />
+      <Button id="btnEnvoiSport" fx:id="btnEnvoiSport" layoutX="275.0" layoutY="297.0" mnemonicParsing="false" onAction="#handleBtnEnvoiSport" text="--&gt;" />
+      <ListView id="lvSport" fx:id="lvSport" layoutX="35.0" layoutY="297.0" prefHeight="124.0" prefWidth="200.0" />
+      <Label layoutX="33.0" layoutY="280.0" text="Liste de tous les sports : " />
+      <TextField id="txtTypeRevetement" fx:id="txtTypeRevetement" layoutX="434.0" layoutY="202.0" />
+      <TextField id="txtSurface" fx:id="txtSurface" layoutX="434.0" layoutY="167.0" />
+      <TextField id="txtNom" fx:id="txtNom" layoutX="434.0" layoutY="134.0" />
+      <Label layoutX="310.0" layoutY="206.0" text="Type de revetement : " />
+      <Label layoutX="310.0" layoutY="171.0" text="Surface : " />
+      <Label layoutX="309.0" layoutY="138.0" prefHeight="17.0" prefWidth="37.0" text="Nom : " />
+      <Label layoutX="185.0" layoutY="21.0" text="Ajouter une salle " textFill="#4800ff">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <ListView id="lvSalle" fx:id="lvSalle" layoutX="33.0" layoutY="106.0" prefHeight="150.0" prefWidth="200.0" />
+      <Label layoutX="35.0" layoutY="82.0" text="Liste de toutes les salles : " />
+      <ImageView fitHeight="93.0" fitWidth="173.0" layoutX="401.0" layoutY="12.0" pickOnBounds="true">
+         <image>
+            <Image url="@../ressources/img/AjouterSalle.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

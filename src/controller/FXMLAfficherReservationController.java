@@ -5,6 +5,8 @@
  */
 package controller;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,11 +21,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import model.Association;
-import model.GestionReservationBdD;
 import model.GestionSalleBdD;
-import model.Planning;
 import model.Salle;
+import model.Association;
+import model.Planning;
+import model.GestionReservationBdD;
 
 /**
  * FXML Controller class
@@ -71,6 +73,35 @@ public class FXMLAfficherReservationController implements Initializable
                     }    
                 }
             } 
+        }
+    }
+    
+    public void handleBtnPDF()
+    {
+        if (cmbSalle.getSelectionModel().getSelectedItem() != null && dateReservation.getValue() != null ) 
+        {
+            Salle UneSalle = (Salle)(cmbSalle.getSelectionModel().getSelectedItem());
+            LocalDate UneDate = dateReservation.getValue();
+            if(UneDate.getDayOfWeek().getValue() != 1)
+            {
+                UneDate = UneDate.minusDays(UneDate.getDayOfWeek().getValue()-1);
+            }
+            ObservableList<Planning> lePlanning= GestionReservationBdD.getPlanning(UneSalle,UneDate);
+            String chemin = PDFgenerator.getPDF(UneSalle,UneDate,lePlanning);
+            try 
+            {
+               Desktop desktop = Desktop.getDesktop();
+                File f = new File(chemin);
+                if (f.exists()) 
+                {
+                    desktop.open(f);
+                }
+            }
+            catch (Exception e) 
+            {
+                System.out.println(e.toString());
+            }
+            
         }
     }
     

@@ -23,6 +23,7 @@
             <items>
                   <MenuItem id="menuItemAssociation" fx:id="menuItemAssociation" mnemonicParsing="false" onAction="#handleAjouterAssociation" text="Association" />
               <MenuItem id="menuItemAjouterReservation" fx:id="menuItemAjouterReservation" mnemonicParsing="false" onAction="#handleAjouterReservation" text="Réservation" />
+                  <MenuItem id="menuItemAjouterSalle" fx:id="menuItemAjouterSalle" mnemonicParsing="false" onAction="#handleAjouterSalle" text="Salle" />
                   <MenuItem id="menuItemAjouterSport" fx:id="menuItemAjouterSport" mnemonicParsing="false" onAction="#handleAjouterSport" text="Sport" />
             </items>
           </Menu>

@@ -111,17 +111,17 @@ public class FXMLModifierSalleController implements Initializable
             messageErreur =messageErreur + "\n" + "Salle invalide";
         }
         
-        if (txtNom.getText() == null || txtNom.getText().length()<0)
+        if (txtNom.getText() == null || txtNom.getText().length()<=0)
         {
             messageErreur =messageErreur + "\n" + "Nom invalide";
           }
         
-        if (txtSurface.getText() == null || txtSurface.getText().length()<0)
+        if (txtSurface.getText() == null || txtSurface.getText().length()<=0)
         {
             messageErreur =messageErreur + "\n" + "Surface invalide";
          }
 
-        if (txtTypeRevetement.getText() == null || txtTypeRevetement.getText().length()<0)
+        if (txtTypeRevetement.getText() == null || txtTypeRevetement.getText().length()<=0)
         {
             messageErreur =messageErreur+"\n" + "Type de revêtement invalide";
         }
@@ -221,7 +221,7 @@ public class FXMLModifierSalleController implements Initializable
             else
             {
                 alert.setTitle("Succès");
-                alert.setHeaderText("Modification de la samme effectuée");
+                alert.setHeaderText("Modification de la salle effectuée");
                 alert.setContentText("Nb de ligne(s) affectée(s) : " + nbLignes); 
                 txtNom.setText(null);
                 txtSurface.setText(null);

@@ -85,6 +85,33 @@ public class FXMLNoeudRacineController implements Initializable
     }
     
     @FXML
+    public boolean handleAjouterSalle()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLAjouterSalle.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Ajouter une salle");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            FXMLAjouterSalleController controleur = loader.getController();
+            controleur.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return controleur.isOkClick();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue FXMLNoeudRacineController.handleAjouterReservationSalle() :" + ioe.getMessage());
+          return false;
+        }
+    }
+    
+    @FXML
     public boolean handleAjouterSport()
     {
         try
