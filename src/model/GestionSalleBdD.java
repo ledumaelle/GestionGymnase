@@ -50,6 +50,48 @@ public class GestionSalleBdD
         return lesSalles;
     }
     
+    public static ObservableList<Salle> getSalleParAssociation(Association pUneAssociation)
+    {
+        Connection conn; //connexion
+	Statement stmt;
+	ResultSet jeuEnr;
+	String pilote = "org.gjt.mm.mysql.Driver";
+	String url = new String("jdbc:mysql://localhost/gymnase");
+        ObservableList<Salle> lesSallesParAssociation = FXCollections.observableArrayList();
+        try
+	{
+            Class.forName(pilote);
+            conn = DriverManager.getConnection(url,"root","");
+            stmt = conn.createStatement();			            
+            jeuEnr = stmt.executeQuery("SELECT * FROM SALLE WHERE NumSalle IN ( SELECT NumSalle FROM SPORT,ACCUEILLIR WHERE SPORT.numSport=ACCUEILLIR.numSport AND SPORT.NumSport IN ( SELECT NumSport FROM ASSOCIATION,PRATIQUER WHERE ASSOCIATION.numAssociation=PRATIQUER.numAssociation AND ASSOCIATION.numAssociation="+pUneAssociation.getNumAssociation()+" ) )");
+            Salle UneSalle;
+            if(jeuEnr.next())
+            {
+                UneSalle= new Salle(jeuEnr.getInt("NumSalle"),jeuEnr.getString("NomSalle"), jeuEnr.getFloat("surface"),jeuEnr.getString("TypeRevetement"));
+                lesSallesParAssociation.add(UneSalle);
+                    
+                while (jeuEnr.next())
+                {
+                    UneSalle= new Salle(jeuEnr.getInt("NumSalle"),jeuEnr.getString("NomSalle"), jeuEnr.getFloat("surface"),jeuEnr.getString("TypeRevetement"));
+                    lesSallesParAssociation.add(UneSalle);
+                } 
+            }
+                      			            
+            jeuEnr.close();
+            stmt.close();
+            conn.close();
+	}			        
+	catch (SQLException sqle)
+	{
+            System.out.println("ERREUR SQL " + sqle.getMessage());
+	}
+	catch (ClassNotFoundException cnfe)
+	{
+            System.out.println("ERREUR Driver " + cnfe.getMessage());
+	} 
+        return lesSallesParAssociation;
+    }
+        
     public static Salle getSalle(String pNom, float pSurface, String pTypeRevetement)
     {
         Connection conn; //connexion

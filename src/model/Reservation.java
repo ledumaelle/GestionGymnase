@@ -13,27 +13,27 @@ import java.sql.Date;
  */
 public class Reservation
 {
-    private int NumSalle;   
+    private Salle UneSalle;   
     private Date Date;
     private Integer Heure;
     private Association UneAssociation;
 
-    public Reservation(int NumSalle, Date Date, Integer Heure, Association UneAssociation)
+    public Reservation(Salle UneSalle, Date Date, Integer Heure, Association UneAssociation)
     {
-        this.NumSalle = NumSalle;
+        this.UneSalle = UneSalle;
         this.Date = Date;
         this.Heure = Heure;
         this.UneAssociation = UneAssociation;
     }
 
-    public int getNumSalle()
+    public Salle getUneSalle()
     {
-        return NumSalle;
+        return UneSalle;
     }
 
-    public void setNumSalle(int NumSalle)
+    public void setUneSalle(Salle UneSalle)
     {
-        this.NumSalle = NumSalle;
+        this.UneSalle = UneSalle;
     }
 
     public Date getDate()
@@ -74,7 +74,7 @@ public class Reservation
     @Override
     public String toString()
     {
-        return NumSalle + " le " + Date + " à " + Heure + " par " + UneAssociation.getNomAssociation(); 
+        return UneSalle.getNomSalle() + " le " + Date + " à " + Heure + " par " + UneAssociation.getNomAssociation(); 
     }
     
 }

@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -223,7 +222,7 @@ public class FXMLAjouterReservationController implements Initializable
                 String PlageHorraire= lesHeuresReservees.get(i);
                 String[] tab = PlageHorraire.split("-");
                 Integer UneHeure = Integer.parseInt(tab[0]);
-                Reservation UneReservation= new Reservation(UneSalle.getNumSalle(),UneDate,UneHeure,UneAssociation);                
+                Reservation UneReservation= new Reservation(UneSalle,UneDate,UneHeure,UneAssociation);                
                           
                 nbLignes=nbLignes+GestionReservationBdD.ajouterReservation(UneReservation);
                 if (nbLignes == -1)

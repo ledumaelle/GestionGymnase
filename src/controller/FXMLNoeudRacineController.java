@@ -291,5 +291,33 @@ public class FXMLNoeudRacineController implements Initializable
           return false;
         }
     }
+
+    
+    @FXML
+    public boolean handleSupprimerReservation()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLSupprimerReservation.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Supprimer une réservation");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            FXMLSupprimerReservationController controleur = loader.getController();
+            controleur.setDialogStage(dialogStage);
+            dialogStage.showAndWait();
+            return controleur.isOkClick();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+          return false;
+        }
+    }
         
 }

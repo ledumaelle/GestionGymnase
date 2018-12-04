@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="549.0" prefWidth="437.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLSupprimerReservationController">
+   <children>
+      <Label layoutX="53.0" layoutY="26.0" text="Supprimer une réservation" textFill="#4800ff">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="79.0" layoutY="171.0" text="Salle : " />
+      <ComboBox id="cmbSalle" fx:id="cmbSalle" layoutX="162.0" layoutY="167.0" prefHeight="25.0" prefWidth="224.0" />
+      <DatePicker id="dateReservation" fx:id="dateReservation" layoutX="164.0" layoutY="209.0" onAction="#handleSelectionDate" prefHeight="25.0" prefWidth="224.0" />
+      <Label layoutX="79.0" layoutY="213.0" text="Date : " />
+      <ComboBox id="cmbAssociation" fx:id="cmbAssociation" layoutX="144.0" layoutY="81.0" onAction="#handleSelectionAssociation" prefHeight="25.0" prefWidth="240.0" />
+      <Label layoutX="42.0" layoutY="85.0" text="Association : ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Label>
+      <Button id="btnSupprimerReservation" fx:id="btnSupprimerReservation" layoutX="204.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleBtnSupprimerReservation" text="Supprimer" />
+      <Button id="btnAnnuler" fx:id="btnAnnuler" layoutX="289.0" layoutY="501.0" mnemonicParsing="false" onAction="#handleBtnAnnuler" text="Annuler" />
+      <ImageView fitHeight="182.0" fitWidth="215.0" layoutX="181.0" layoutY="288.0" pickOnBounds="true">
+         <image>
+            <Image url="@../ressources/img/SupprimerReservation.jpg" />
+         </image>
+      </ImageView>
+      <TableView id="tabReservation" fx:id="tabReservation" layoutX="28.0" layoutY="265.0" prefHeight="248.0" prefWidth="119.0">
+        <columns>
+          <TableColumn id="colHeure" fx:id="colHeure" prefWidth="93.0" text="Heure" />
+        </columns>
+      </TableView>
+      <Label layoutX="79.0" layoutY="129.0" text="Sport : " />
+      <ComboBox id="cmbSport" fx:id="cmbSport" layoutX="162.0" layoutY="125.0" onAction="#handleSelectionSport" prefHeight="25.0" prefWidth="224.0" />
+   </children>
+</AnchorPane>
