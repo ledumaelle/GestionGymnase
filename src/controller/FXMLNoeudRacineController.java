@@ -162,6 +162,30 @@ public class FXMLNoeudRacineController implements Initializable
     }  
     
     @FXML
+    public void handleAfficherStatistique()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(FXMainApplicationGestionGymnase.class.getResource("/view/FXMLAfficherStatistique.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Afficher les statistiques d'une salle");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            // Affiche la boite de dialogue et attend que l'utilisateur la ferme
+            dialogStage.showAndWait();
+        }
+
+        catch(IOException ioe)
+        {
+          System.out.println("ERREUR chargement boite dialogue:" + ioe.getMessage());
+        }
+    } 
+    
+    
+    @FXML
     public void handleAfficherAssociation()
     {
         try
