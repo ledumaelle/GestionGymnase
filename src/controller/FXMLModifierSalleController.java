@@ -7,6 +7,8 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -114,12 +116,16 @@ public class FXMLModifierSalleController implements Initializable
         if (txtNom.getText() == null || txtNom.getText().length()<=0)
         {
             messageErreur =messageErreur + "\n" + "Nom invalide";
-          }
+        }
         
-        if (txtSurface.getText() == null || txtSurface.getText().length()<=0)
+        Pattern regex = Pattern.compile("[0-9]*\\.?[0-9]+");
+        Matcher resultat = regex.matcher(txtSurface.getText());
+        boolean b = resultat.matches();
+ 
+        if (txtSurface.getText() == null || txtSurface.getText().length()<=0 || !(b)) 
         {
             messageErreur =messageErreur + "\n" + "Surface invalide";
-         }
+        }
 
         if (txtTypeRevetement.getText() == null || txtTypeRevetement.getText().length()<=0)
         {

@@ -64,8 +64,10 @@ public class GestionAssociationBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();			            
             jeuEnr = stmt.executeQuery("SELECT MAX(NumAssociation)  AS " + "NbMaxAssociations" + " FROM ASSOCIATION");
-            jeuEnr.next();
-            NbMax=jeuEnr.getInt("NbMaxAssociations");
+            if (jeuEnr.next())
+            {                
+                NbMax=jeuEnr.getInt("NbMaxAssociations");
+            }
                 			            
             jeuEnr.close();
             stmt.close();
@@ -96,16 +98,18 @@ public class GestionAssociationBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();			            
             jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbAssociations" + "  FROM ASSOCIATION WHERE NumAssociation = "+pUneAssociation.getNumAssociation());
-            jeuEnr.next();
-            NbLignes=jeuEnr.getInt("NbAssociations");
-            if(NbLignes == 0)
+            if (jeuEnr.next())
             {
-                NbLignes = stmt.executeUpdate("INSERT INTO ASSOCIATION(nomAssociation,AdresseAssociation,CPAssociation,VilleAssociation,NomResponsable) VALUES ('"+pUneAssociation.getNomAssociation()+"' , '"+pUneAssociation.getAdresseAssociation()+"' , '"+pUneAssociation.getVilleAssociation()+"', '"+pUneAssociation.getCPAssociation()+"', '"+pUneAssociation.getNomResponsable()+"')");
-            }
-            else
-            {
-                NbLignes=-1;
-            }           			            
+                NbLignes=jeuEnr.getInt("NbAssociations");
+                if(NbLignes == 0)
+                {
+                    NbLignes = stmt.executeUpdate("INSERT INTO ASSOCIATION(nomAssociation,AdresseAssociation,CPAssociation,VilleAssociation,NomResponsable) VALUES ('"+pUneAssociation.getNomAssociation()+"' , '"+pUneAssociation.getAdresseAssociation()+"' , '"+pUneAssociation.getVilleAssociation()+"', '"+pUneAssociation.getCPAssociation()+"', '"+pUneAssociation.getNomResponsable()+"')");
+                }
+                else
+                {
+                    NbLignes=-1;
+                }   
+            }                    			            
             jeuEnr.close();
             stmt.close();
             conn.close();

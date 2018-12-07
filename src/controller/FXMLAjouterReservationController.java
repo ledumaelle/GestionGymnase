@@ -9,6 +9,8 @@ import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -185,7 +187,7 @@ public class FXMLAjouterReservationController implements Initializable
         {
             messageErreur =messageErreur+"\n" + "Date invalide";
         }
-
+        
         if (lvHeureReservation.getSelectionModel().getSelectedItem() == null || lvHeureReservation.getSelectionModel().getSelectedItem() == "")
         {
             messageErreur =messageErreur+"\n" + "Heure invalide";

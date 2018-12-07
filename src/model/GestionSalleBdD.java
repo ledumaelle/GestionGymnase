@@ -139,9 +139,10 @@ public class GestionSalleBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();			            
             jeuEnr = stmt.executeQuery("SELECT MAX(NuMSalle)  AS " + "NbMaxSalles" + " FROM SALLE");
-            jeuEnr.next();
-            NbMax=jeuEnr.getInt("NbMaxSalles");
-                			            
+            if (jeuEnr.next())
+            {                
+                NbMax=jeuEnr.getInt("NbMaxSalles");
+            }                			            
             jeuEnr.close();
             stmt.close();
             conn.close();
@@ -206,16 +207,18 @@ public class GestionSalleBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();			            
             jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbSalles" + "  FROM SALLE WHERE NomSalle = '"+pUneSalle.getNomSalle()+"'");
-            jeuEnr.next();
-            NbLignes=jeuEnr.getInt("NbSalles");
-            if(NbLignes == 0)
+            if (jeuEnr.next())
             {
-                NbLignes = stmt.executeUpdate("INSERT INTO SALLE(NomSalle,Surface,TypeRevetement) VALUES ('"+pUneSalle.getNomSalle()+"' , "+pUneSalle.getSurface()+" , '"+pUneSalle.getTypeDeRevetement()+"')");
-            }
-            else
-            {
-                NbLignes=-1;
-            }           			            
+                NbLignes=jeuEnr.getInt("NbSalles");
+                if(NbLignes == 0)
+                {
+                    NbLignes = stmt.executeUpdate("INSERT INTO SALLE(NomSalle,Surface,TypeRevetement) VALUES ('"+pUneSalle.getNomSalle()+"' , "+pUneSalle.getSurface()+" , '"+pUneSalle.getTypeDeRevetement()+"')");
+                }
+                else
+                {
+                    NbLignes=-1;
+                }   
+            }                    			            
             jeuEnr.close();
             stmt.close();
             conn.close();

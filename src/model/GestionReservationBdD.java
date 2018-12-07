@@ -154,7 +154,7 @@ public class GestionReservationBdD
         Connection conn; //connexion
 	Statement stmt;
 	ResultSet jeuEnr;
-        int nbLignes=0;
+        int nbLignes=-1;
 	String pilote = "org.gjt.mm.mysql.Driver";
 	String url = new String("jdbc:mysql://localhost/gymnase");
         try
@@ -163,16 +163,18 @@ public class GestionReservationBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();  
             jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbReservations" + "  FROM RESERVATION WHERE NumSalle="+pUneReservation.getUneSalle().getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure = "+pUneReservation.getHeure());
-            jeuEnr.next();
-            nbLignes=jeuEnr.getInt("NbReservations");
-            if(nbLignes == 0)
+            if(jeuEnr.next())
             {
-                nbLignes = stmt.executeUpdate("INSERT INTO RESERVATION VALUES ("+pUneReservation.getUneSalle().getNumSalle()+",'"+pUneReservation.getDate()+"',"+pUneReservation.getHeure()+","+pUneReservation.getUneAssociation().getNumAssociation()+")");
-            }
-            else
-            {
-                nbLignes=-1;
-            }
+                nbLignes=jeuEnr.getInt("NbReservations");
+                if(nbLignes == 0)
+                {
+                    nbLignes = stmt.executeUpdate("INSERT INTO RESERVATION VALUES ("+pUneReservation.getUneSalle().getNumSalle()+",'"+pUneReservation.getDate()+"',"+pUneReservation.getHeure()+","+pUneReservation.getUneAssociation().getNumAssociation()+")");
+                }
+                else
+                {
+                    nbLignes=-1;
+                }
+            }            
             stmt.close();
             conn.close();
 	}			        
@@ -192,7 +194,7 @@ public class GestionReservationBdD
         Connection conn; //connexion
 	Statement stmt;
 	ResultSet jeuEnr;
-        int nbLignes=0;
+        int nbLignes=-1;
 	String pilote = "org.gjt.mm.mysql.Driver";
 	String url = new String("jdbc:mysql://localhost/gymnase");
         try
@@ -201,16 +203,18 @@ public class GestionReservationBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();  
             jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbReservations" + "  FROM RESERVATION WHERE NumSalle="+pUneReservation.getUneSalle().getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure = "+pUneReservation.getHeure());
-            jeuEnr.next();
-            nbLignes=jeuEnr.getInt("NbReservations");
-            if(nbLignes == 1)
+            if(jeuEnr.next())
             {
-                nbLignes = stmt.executeUpdate("DELETE FROM RESERVATION WHERE NumSalle="+pUneReservation.getUneSalle().getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure="+pUneReservation.getHeure());
-            }
-            else
-            {
-                nbLignes=-1;
-            }
+                nbLignes=jeuEnr.getInt("NbReservations");
+                if(nbLignes == 1)
+                {
+                    nbLignes = stmt.executeUpdate("DELETE FROM RESERVATION WHERE NumSalle="+pUneReservation.getUneSalle().getNumSalle()+" AND Date='"+pUneReservation.getDate()+"' AND Heure="+pUneReservation.getHeure());
+                }
+                else
+                {
+                    nbLignes=-1;
+                }
+            }            
             stmt.close();
             conn.close();
 	}			        

@@ -64,8 +64,10 @@ public class GestionSportBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();			            
             jeuEnr = stmt.executeQuery("SELECT MAX(NumSport)  AS " + "NbMaxSports" + " FROM SPORT");
-            jeuEnr.next();
-            NbMax=jeuEnr.getInt("NbMaxSports");
+            if (jeuEnr.next())
+            {                
+                NbMax=jeuEnr.getInt("NbMaxSports");
+            }
                 			            
             jeuEnr.close();
             stmt.close();
@@ -270,7 +272,7 @@ public class GestionSportBdD
     public static int modifierSport(Sport pUnSport, String pNom)
     {
         Connection conn; //connexion
-        int NbLignes=0;
+        int NbLignes=-1;
 	Statement stmt;
 	ResultSet jeuEnr;
 	String pilote = "org.gjt.mm.mysql.Driver";
@@ -281,16 +283,18 @@ public class GestionSportBdD
             conn = DriverManager.getConnection(url,"root","");
             stmt = conn.createStatement();			            
             jeuEnr = stmt.executeQuery("SELECT COUNT(*) AS " + "NbSports" + "  FROM SPORT WHERE NomSport = '"+pNom+"'");
-            jeuEnr.next();
-            NbLignes=jeuEnr.getInt("NbSports");
-            if(NbLignes == 0)
+            if(jeuEnr.next())
             {
-                NbLignes = stmt.executeUpdate("UPDATE Sport SET NomSport ='"+pNom+"' WHERE NomSport='"+pUnSport.getNomSport()+"'");
-            }
-            else
-            {
-                NbLignes=-1;
-            }           			            
+               NbLignes=jeuEnr.getInt("NbSports");
+                if(NbLignes == 0)
+                {
+                    NbLignes = stmt.executeUpdate("UPDATE Sport SET NomSport ='"+pNom+"' WHERE NomSport='"+pUnSport.getNomSport()+"'");
+                }
+                else
+                {
+                    NbLignes=-1;
+                }  
+            }                     			            
             jeuEnr.close();
             stmt.close();
             conn.close();

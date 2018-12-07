@@ -7,13 +7,14 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -95,8 +96,11 @@ public class FXMLAjouterSalleController implements Initializable
         {
             messageErreur =messageErreur + "\n" + "Nom invalide";
         }
-        
-        if (txtSurface.getText() == null || txtSurface.getText().length()<=0)
+        Pattern regex = Pattern.compile("[0-9]*\\.?[0-9]+");
+        Matcher resultat = regex.matcher(txtSurface.getText());
+        boolean b = resultat.matches();
+ 
+        if (txtSurface.getText() == null || txtSurface.getText().length()<=0 || !(b)) 
         {
             messageErreur =messageErreur + "\n" + "Surface invalide";
         }
@@ -203,6 +207,9 @@ public class FXMLAjouterSalleController implements Initializable
                 txtSurface.setText(null);
                 txtTypeRevetement.setText(null);              
                 valide=true;
+                ObservableList<Salle> lesSalles =  GestionSalleBdD.getSalle();
+                lvSalle.setItems(null);
+                lvSalle.setItems(lesSalles);
             }
             alert.showAndWait();   
             
@@ -210,11 +217,10 @@ public class FXMLAjouterSalleController implements Initializable
             {
                //AJOUT ACCUEILLIR
                 nbLignes=0;
-                int i,j;
+                int i;
                 for(i=0;i<lesSportsSalles.size();i++)
                 {                
-                    //BUUUUUUUUUUUUUUG
-                    Salle UneSalle = GestionSalleBdD.getSalle(txtNom.getText(),Float.parseFloat(txtSurface.getText()), txtTypeRevetement.getText());
+                    Salle UneSalle = GestionSalleBdD.getSalle(TempSalle.getNomSalle(),TempSalle.getSurface(),TempSalle.getTypeDeRevetement());
                     Sport UnSport = new Sport (lesSportsSalles.get(i).getNumSport(),lesSportsSalles.get(i).getNomSport());
                     //si le sport n'existe pas dans la BdD
                     if(!(GestionSportBdD.existe(UnSport)))
